@@ -31,6 +31,10 @@ const router = createRouter({
     {
       path: "/",
       component: MainLayout,
+      meta: {
+        requiredAuth: false,
+        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+      },
       children: [
         {
           path: "",
@@ -52,6 +56,10 @@ const router = createRouter({
     {
       path: "/usuario",
       component: UsuarioLayout,
+      meta: {
+        requiredAuth: true,
+        roles: ["adminAsociacion", "administrador", "publico"],
+      },
       children: [
         {
           path: "",
@@ -63,6 +71,10 @@ const router = createRouter({
     {
       path: "/asociacion",
       component: MainLayout,
+      meta: {
+        requiredAuth: false,
+        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+      },
       children: [
         {
           path: "",
@@ -74,6 +86,10 @@ const router = createRouter({
     {
       path: "/admin",
       component: AdminLayout,
+      meta: {
+        requiredAuth: true,
+        roles: ["administrador"],
+      },
       children: [
         {
           path: "",
@@ -85,6 +101,10 @@ const router = createRouter({
     {
       path: "/admin-asociacion",
       component: AdminAsocLayout,
+      meta: {
+        requiredAuth: true,
+        roles: ["adminAsociacion"],
+      },
       children: [
         {
           path: "",
@@ -102,6 +122,10 @@ const router = createRouter({
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: NotFoundView,
+      meta: {
+        requiredAuth: false,
+        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+      },
     },
   ],
 });

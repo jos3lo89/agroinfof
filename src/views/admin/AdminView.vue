@@ -1,11 +1,7 @@
-<script setup lang="ts"> 
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  wadafa
+  <h1>solo el "administrador" entra aqui</h1>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

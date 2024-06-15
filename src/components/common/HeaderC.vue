@@ -29,7 +29,7 @@ const logout = async () => {
     await AxiosUser.logout();
 
     authStore.accessToken = false;
-    authStore.rol = "";
+    authStore.rol = "visitante";
     authStore.usuario.nombre = "";
     authStore.usuario.foto = null;
 

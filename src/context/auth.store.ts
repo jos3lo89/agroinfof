@@ -6,7 +6,7 @@ export const useAuthStore = defineStore(
   "authStore",
   () => {
     const accessToken = ref(false);
-    const rol = ref("");
+    const rol = ref("visitante");
     const usuario = reactive({} as authUserI);
 
     return {
