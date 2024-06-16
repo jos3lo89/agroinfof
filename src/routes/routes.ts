@@ -14,6 +14,7 @@ import NotFoundView from "../views/NotFoundView.vue";
 
 // vistas de asociacion
 import AsociacionView from "../views/asociacion/AsociacionView.vue";
+import AnunciosView from "../views/asociacion/AnunciosView.vue";
 
 // vistas del usuario con autenticacion
 import MiPerfilView from "../views/profile/PerfilView.vue";
@@ -69,7 +70,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "/asociacion",
+      path: "/asociacion/:codeAsoc",
       component: MainLayout,
       meta: {
         requiredAuth: false,
@@ -80,6 +81,11 @@ const router = createRouter({
           path: "",
           name: "asociacion",
           component: AsociacionView,
+        },
+        {
+          path: "anuncios",
+          name: "anuncios",
+          component: AnunciosView,
         },
       ],
     },

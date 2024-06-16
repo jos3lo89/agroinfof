@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import HeaderC from "../components/common/HeaderC.vue";
+import FooterC from "../components/common/FooterC.vue";
 </script>
 
 <template>
@@ -8,8 +9,7 @@ import HeaderC from "../components/common/HeaderC.vue";
   <main>
     <RouterView />
   </main>
+  <FooterC />
 </template>
 
-<style scoped>
-/* Tus estilos aquí */
-</style>
+<style scoped></style>

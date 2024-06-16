@@ -43,14 +43,14 @@ router.beforeEach((to, _from, next) => {
 
   // Implementar el control de acceso
 
-  console.log(" boleano si require o no el token -> ", requiredAuth);
+ /*  console.log(" boleano si require o no el token -> ", requiredAuth);
   console.log(
     " array de roles que tiene permiso de acceder a la página -> ",
     requiredRoles
   );
   console.log(" cookie token -> ", token);
   console.log(" booleano si tiene token de authStore -> ", storeToken);
-  console.log(" string rol de authStore -> ", storeRol);
+  console.log(" string rol de authStore -> ", storeRol); */
 
   if (requiredAuth && !token) {
     // si es necesario autenticarse y no tiene token

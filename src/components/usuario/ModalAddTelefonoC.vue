@@ -1,0 +1,120 @@
+<script setup lang="ts">
+import { reactive } from "vue";
+import { AxiosUser } from "../../service/instance";
+import { Toast } from "../../utils/toast";
+
+const datos = reactive({
+  tipo: "movil",
+  numero: "",
+});
+
+const props = defineProps({
+  abrir3: Boolean,
+});
+
+const emits = defineEmits(["close3"]);
+
+const close3 = () => {
+  emits("close3");
+};
+
+const agegarTelefono = async () => {
+  try {
+    const res = await AxiosUser.agregarTelefono(datos);
+    console.log(res);
+  } catch (error: any) {
+    console.log(error);
+    if (error.response.status == 400) {
+      error.response.data.message.forEach((err: any) => {
+        Toast.warning(err);
+      });
+    }
+  }
+};
+</script>
+<template>
+  <div
+    v-if="props.abrir3"
+    class="fixed inset-0 flex items-center justify-center z-50"
+  >
+    <div @click="close3" class="fixed inset-0 bg-[rgba(0,0,0,0.5)]"></div>
+
+    <dialog
+      :open="props.abrir3"
+      class="z-60 bg-white dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg relative"
+    >
+      <button
+        @click="close3"
+        class="absolute p-2 rounded shadow-xl bg-gray-300 dark:bg-slate-600 right-0 top-0 hover:bg-red-500 hover:text-white"
+      >
+        <svg
+          class="w-5 h-5"
+          data-slot="icon"
+          data-darkreader-inline-stroke=""
+          fill="none"
+          stroke-width="1.5"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+
+      <div class="text-center mb-3 mt-10 md:mt-4">
+        <strong class="text-xl font-semibold">Agegar Telefono</strong>
+      </div>
+
+      <form
+        @submit.prevent="agegarTelefono"
+        class="dark:bg-gray-800 p-4 rounded-lg mb-4"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="md:mb-5">
+            <label
+              for="tipos"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Tipo</label
+            >
+            <select
+              v-model="datos.tipo"
+              id="tipos"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option>movil</option>
+              <option>fijo</option>
+            </select>
+          </div>
+          <div class="md:mb-5">
+            <label
+              for="numero"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Tu Número</label
+            >
+            <input
+              v-model="datos.numero"
+              type="number"
+              id="numero"
+              placeholder="99 999 999"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="bg-transparent border hover:text-white hover:border-blue-600 hover:bg-blue-600 mt-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 dark:bg-transparent dark:hover:bg-blue-800"
+        >
+          Agregar
+        </button>
+      </form>
+    </dialog>
+  </div>
+</template>
+<style scoped></style>

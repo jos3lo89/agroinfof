@@ -15,3 +15,31 @@ export interface LoginDataI {
   fechaCreacion: string;
   fechaActualizacion: string;
 }
+
+// datos de usuario
+export interface DatosUsuario extends LoginDataI {
+  foto_id: string | null;
+  telefonos: telefonos[]
+}
+
+interface telefonos {
+  id: number,
+  numero: number,
+  tipo: string,
+  usuario_id: string
+}
+
+
+// datos de usuario
+export interface registrarI {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  clave: string;
+}
+
+// editar datos de usuario
+  export interface editarDatosI {
+    nombre: string;
+    apellido: string;
+  }
