@@ -8,7 +8,6 @@ import { AxiosUser } from "../../service/instance";
 const authStore = useAuthStore();
 
 const router = useRouter();
-// const route = useRoute();
 
 const openMenu = ref(false);
 

@@ -47,4 +47,18 @@ export class AxiosUser {
   static async editarDatos(data: editarDatosI) {
     return await instance.put("/usuario/actualizar-datos", data);
   }
+
+  // asociacion
+
+  static async getDatosAsoc() {
+    return await instance.get("/asociacion/datos-admin");
+  }
+
+  static async listarAsoc() {
+    return await instance.get("/asociacion/lista-inicio");
+  }
+
+  static async getasocByname(nombre: string) {
+    return await instance.get(`/asociacion/datos/${nombre}`);
+  }
 }

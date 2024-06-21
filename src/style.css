@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* editando la bara START */
+
+html::-webkit-scrollbar {
+  width: 10px;
+  background-color: #172554;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #2e1065;
+  border-radius: 10px;
+}
+
+/* editando la bara END */

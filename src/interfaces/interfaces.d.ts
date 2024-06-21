@@ -43,3 +43,38 @@ export interface registrarI {
     nombre: string;
     apellido: string;
   }
+
+
+
+  // lista de asociaciones datos 
+
+  interface AsocListaI {
+    admin_id: string;
+    descripcion: string;
+    fechaActualizacion: string;
+    fechaCreacion: string;
+    id: string;
+    nombre: string;
+    portada: string;
+    portada_id: null | string;
+  }
+  
+
+
+  // asociacion datos asocview 
+  export interface asocViewI {
+    id: string
+    nombre: string
+    descripcion: string
+    portada: string
+    portada_id: string | null
+    telefonos: Telefono[]
+  }
+  
+  export interface Telefono {
+    id: number
+    asociacion_id: string
+    numero: string
+    tipo: string
+  }
+  

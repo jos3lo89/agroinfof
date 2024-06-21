@@ -13,9 +13,9 @@ const app = createApp(App);
 const pinia = createPinia();
 
 pinia.use(piniaPersist);
+app.use(pinia);
 
 app.use(VueCookieNext);
-app.use(pinia);
 app.use(router);
 
 app.use(Vue3Toasity, {
@@ -43,7 +43,7 @@ router.beforeEach((to, _from, next) => {
 
   // Implementar el control de acceso
 
- /*  console.log(" boleano si require o no el token -> ", requiredAuth);
+  /*  console.log(" boleano si require o no el token -> ", requiredAuth);
   console.log(
     " array de roles que tiene permiso de acceder a la página -> ",
     requiredRoles

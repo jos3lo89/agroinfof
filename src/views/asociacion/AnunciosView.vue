@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
 
 const route = useRoute();
 
-const state = route.params;
+const params = route.params;
 
-onMounted(() => {
-  console.log(state.codeAsoc);
-});
+console.log(params);
 </script>
 
 <template>

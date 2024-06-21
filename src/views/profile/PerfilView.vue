@@ -152,7 +152,7 @@ const showModalEditarDatos = () => {
 </script>
 
 <template>
-  <section class="flex flex-col md:flex-row justify-around gap-3">
+  <section class="flex flex-col md:flex-row justify-around gap-3 mt-11">
     <div class="bg-gray-100 shadow-lg p-4 rounded-lg dark:bg-gray-800">
       <!-- <div class="absolute bottom-0 right-0 flex items-center gap-2.5"> -->
 

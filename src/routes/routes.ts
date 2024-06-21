@@ -70,7 +70,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "/asociacion/:codeAsoc",
+      path: "/asociacion/:nombre",
       component: MainLayout,
       meta: {
         requiredAuth: false,
@@ -83,7 +83,7 @@ const router = createRouter({
           component: AsociacionView,
         },
         {
-          path: "anuncios",
+          path: "anuncios/:titulo",
           name: "anuncios",
           component: AnunciosView,
         },

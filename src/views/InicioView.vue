@@ -1,30 +1,21 @@
 <script setup lang="ts">
 import SliderC from "../components/common/SliderC.vue";
 import { RouterLink } from "vue-router";
+import { AxiosUser } from "../service/instance";
+import { onMounted, ref } from "vue";
+import { AsocListaI } from "../interfaces/interfaces";
 
-const datosAsocSlider = [
-  {
-    titulo: "Noteworthy technology acquisitions 2021",
-    descripcion:
-      "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-    link: "asociacion",
-    codeAsoc: "papa",
-  },
-  {
-    titulo: "Noteworthy technology acquisitions 2021",
-    descripcion:
-      "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-    link: "asociacion",
-    codeAsoc: "maiz",
-  },
-  {
-    titulo: "Noteworthy technology acquisitions 2021",
-    descripcion:
-      "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-    link: "asociacion",
-    codeAsoc: "quinua",
-  },
-];
+const asocLista = ref<AsocListaI[]>([]);
+
+const getListaAsoc = async () => {
+  const res = await AxiosUser.listarAsoc();
+  asocLista.value = res.data;
+  console.log(res);
+};
+
+onMounted(() => {
+  getListaAsoc();
+});
 </script>
 
 <template>
@@ -64,28 +55,35 @@ const datosAsocSlider = [
       </svg>
     </a>
   </div>
+
   <div
     class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-16 mt-4 place-items-center px-4"
   >
     <div
-      v-for="(item, i) in datosAsocSlider"
+      v-for="(item, i) in asocLista"
       :key="i"
       class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       <RouterLink
-        :to="{ name: item.link, params: { codeAsoc: item.codeAsoc } }"
+        :to="{
+          name: 'asociacion',
+          params: { nombre: item.nombre },
+        }"
       >
         <h5
           class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
-          {{ item.titulo }}
+          {{ item.nombre }}
         </h5>
       </RouterLink>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
         {{ item.descripcion }}
       </p>
       <RouterLink
-        :to="{ name: item.link, params: { codeAsoc: item.codeAsoc } }"
+        :to="{
+          name: 'asociacion',
+          params: { nombre: item.nombre },
+        }"
         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Read more
