@@ -32,8 +32,6 @@ watch(
   </button>
   <button
     @click="
-      router.push({ name: 'anuncios', state: { idAsoc: route.name as string } })
-    "
     class="text-blue-800 px-2 py-1 rounded-lg my-1 bg-white"
   >
     anuncios
