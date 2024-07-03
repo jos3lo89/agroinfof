@@ -8,7 +8,7 @@ import { DatosUsuario } from "../../interfaces/interfaces";
 
 import ModalCambiarClaveC from "../../components/usuario/ModalCambiarClaveC.vue";
 import ModalEliminarAcc from "../../components/usuario/ModalEliminarAcc.vue";
-import ModalAddTelefonoC from "../../components/usuario/ModalAddTelefonoC.vue";
+// import ModalAddTelefonoC from "../../components/usuario/ModalAddTelefonoC.vue";
 import ModalEditarDatosC from "../../components/usuario/ModalEditarDatosC.vue";
 
 // const router = useRouter();
@@ -21,6 +21,22 @@ const openMenuOpciones = ref(false);
 const fotoUserNoFoto = {
   src: "user.webp",
   alt: "foto de usuario no registrado",
+};
+
+const fomatFecha = (fecha: string) => {
+  // const isoDate = "2001-01-19T00:00:00.000Z";
+  const date = new Date(fecha);
+
+  // Ajustar la fecha restando un día
+  date.setUTCDate(date.getUTCDate() - 1);
+
+  // Obtener los componentes de la fecha ajustada
+  const year = date.getUTCFullYear();
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  const day = date.getUTCDate().toString().padStart(2, "0");
+  const day2 = parseInt(day) + 1; // solucion rara
+
+  return `${year}-${month}-${day2}`;
 };
 
 const getUsuario = async () => {
@@ -113,7 +129,7 @@ const eliminarFoto = async () => {
     const res = await AxiosUser.eliminarFoto();
     console.log(res);
 
-    if (res.status == 204) {
+    if (res.status == 200) {
       authStore.usuario.foto = null;
       Toast.success("foto de perfil eliminada");
     }
@@ -184,14 +200,28 @@ const showModalEditarDatos = () => {
           Rol:
           <span class="text-black dark:text-white">{{ datosUsuario.rol }}</span>
         </p>
-        <p
-          v-for="(n, i) in datosUsuario.telefonos"
-          :key="i"
-          class="text-orange-600"
-        >
-          Telefono {{ i + 1 }}:
-          <span class="text-black dark:text-white">{{ n.numero }}</span>
+
+        <p v-if="datosUsuario.telefonos" class="text-orange-600">
+          Telefono :
+          <span class="text-black dark:text-white"
+            >+51 {{ datosUsuario.telefonos.numero }}</span
+          >
         </p>
+
+        <p v-if="datosUsuario.direcciones" class="text-orange-600">
+          Dirección:
+          <span class="text-black dark:text-white">{{
+            datosUsuario.direcciones.direccion
+          }}</span>
+        </p>
+
+        <p v-if="datosUsuario.fechaNacimiento" class="text-orange-600">
+          fecha de nacimiento:
+          <span class="text-black dark:text-white">{{
+            fomatFecha(datosUsuario.fechaNacimiento)
+          }}</span>
+        </p>
+
         <p class="text-orange-600">
           Fecha creación:
           <span class="text-black dark:text-white">{{
@@ -222,7 +252,7 @@ const showModalEditarDatos = () => {
         </button>
         <div
           v-if="openMenuOpciones"
-          class="z-10 absolute left-0 right-0 -top-32 bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
+          class="z-10 absolute left-0 right-0 -top-24 bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
         >
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
             <li>
@@ -243,7 +273,7 @@ const showModalEditarDatos = () => {
                 cambiar contraseña
               </button>
             </li>
-            <li>
+            <!-- <li>
               <button
                 @click="showModalAddTelefono"
                 type="button"
@@ -251,7 +281,7 @@ const showModalEditarDatos = () => {
               >
                 Agregar Telefono
               </button>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -338,11 +368,11 @@ const showModalEditarDatos = () => {
     @close2="openModalCambiarClave = !openModalCambiarClave"
   />
 
-  <ModalAddTelefonoC
+  <!-- <ModalAddTelefonoC
     v-if="openModalAddTelefono"
     :abrir3="openModalAddTelefono"
     @close3="openModalAddTelefono = !openModalAddTelefono"
-  />
+  /> -->
 
   <ModalEditarDatosC
     v-if="openModalEditarDatos"

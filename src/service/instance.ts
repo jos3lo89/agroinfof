@@ -2,15 +2,15 @@ import { editarDatosI, registrarI } from "../interfaces/interfaces";
 import instance from "./axios";
 
 export class AxiosUser {
-  static async registrar(data: registrarI) {
+  static async registrar(data: registrarI) { // funcionando
     return await instance.post("/usuario/registrar", data);
   }
 
-  static async login(data: { correo: string; clave: string }) {
+  static async login(data: { correo: string; clave: string }) { // funcionando
     return await instance.post("/usuario/login", data);
   }
 
-  static async logout() {
+  static async logout() { // funcionando
     return await instance.post("/usuario/logout");
   }
 
@@ -55,7 +55,7 @@ export class AxiosUser {
   }
 
   static async listarAsoc() {
-    return await instance.get("/asociacion/lista-inicio");
+    return await instance.get("/asociacion/lista");
   }
 
   static async getasocByname(nombre: string) {

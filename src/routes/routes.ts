@@ -34,7 +34,7 @@ const router = createRouter({
       component: MainLayout,
       meta: {
         requiredAuth: false,
-        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+        roles: ["admin_asoc", "admin", "publico", "visitante"],
       },
       children: [
         {
@@ -59,7 +59,7 @@ const router = createRouter({
       component: UsuarioLayout,
       meta: {
         requiredAuth: true,
-        roles: ["adminAsociacion", "administrador", "publico"],
+        roles: ["admin_asoc", "admin", "publico"],
       },
       children: [
         {
@@ -74,7 +74,7 @@ const router = createRouter({
       component: MainLayout,
       meta: {
         requiredAuth: false,
-        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+        roles: ["admin_asoc", "admin", "publico", "visitante"],
       },
       children: [
         {
@@ -94,7 +94,7 @@ const router = createRouter({
       component: AdminLayout,
       meta: {
         requiredAuth: true,
-        roles: ["administrador"],
+        roles: ["admin"],
       },
       children: [
         {
@@ -109,7 +109,7 @@ const router = createRouter({
       component: AdminAsocLayout,
       meta: {
         requiredAuth: true,
-        roles: ["adminAsociacion"],
+        roles: ["admin_asoc"],
       },
       children: [
         {
@@ -130,7 +130,7 @@ const router = createRouter({
       component: NotFoundView,
       meta: {
         requiredAuth: false,
-        roles: ["adminAsociacion", "administrador", "publico", "visitante"],
+        roles: ["admin_asoc", "admin", "publico", "visitante"],
       },
     },
   ],

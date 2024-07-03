@@ -50,7 +50,7 @@ const handleDeleteUser = async () => {
 
       close2();
 
-      if (res.status == 204) {
+      if (res.status == 200) {
         Toast.success("usuario eliminado");
       }
       await AxiosUser.logout();

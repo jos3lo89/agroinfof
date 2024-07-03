@@ -73,7 +73,7 @@ const cambiarClaves = async () => {
 
       close();
 
-      if (res.status == 204) {
+      if (res.status == 200) {
         Toast.success("Contraseña cambiada");
       }
     } catch (error: any) {

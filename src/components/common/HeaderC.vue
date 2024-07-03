@@ -17,7 +17,7 @@ const imagenes = [
     alt: "foto de usuario no registrado",
   },
   {
-    src: "http://localhost:5000/uploads/logoAgroInfo.webp",
+    src: "http://localhost:3000/uploads/logoAgroInfo.webp",
     alt: "Logo de AgroInfo",
   },
 ];
@@ -111,7 +111,7 @@ const pusher = (name: string) => {
                 Mi Perfil
               </button>
             </li>
-            <li v-if="authStore.rol == 'administrador'">
+            <li v-if="authStore.rol == 'admin'">
               <button
                 @click="pusher('admin')"
                 class="bg-sky-600 px-2 py-1 rounded-lg my-1 text-white capitalize"
@@ -119,7 +119,7 @@ const pusher = (name: string) => {
                 panel de control
               </button>
             </li>
-            <li v-if="authStore.rol == 'adminAsociacion'">
+            <li v-if="authStore.rol == 'admin_asoc'">
               <button
                 @click="pusher('admin-asociacion')"
                 class="bg-amber-600 px-2 py-1 rounded-lg my-1 text-white capitalize"

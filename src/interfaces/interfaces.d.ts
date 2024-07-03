@@ -10,8 +10,8 @@ export interface LoginDataI {
   nombre: string;
   apellido: string;
   correo: string;
-  foto: string | null;
   rol: string;
+  foto: string | null;
   fechaCreacion: string;
   fechaActualizacion: string;
 }
@@ -19,16 +19,28 @@ export interface LoginDataI {
 // datos de usuario
 export interface DatosUsuario extends LoginDataI {
   foto_id: string | null;
-  telefonos: telefonos[]
+  telefonos: telefonos | null;
+  direcciones: direcciones | null;
+  estado: string;
+  fechaNacimiento: string | null;
+  genero: string | null;
+}
+
+interface direcciones {
+  id: string;
+  usuario_id: string;
+  direccion: string;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
 }
 
 interface telefonos {
-  id: number,
-  numero: number,
-  tipo: string,
-  usuario_id: string
+  id: string;
+  usuario_id: string;
+  numero: string;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
 }
-
 
 // datos de usuario
 export interface registrarI {
@@ -39,42 +51,41 @@ export interface registrarI {
 }
 
 // editar datos de usuario
-  export interface editarDatosI {
-    nombre: string;
-    apellido: string;
-  }
+export interface editarDatosI {
+  nombre: string;
+  apellido: string;
+  fecha_nacimiento: string;
+  genero: string;
+  telefono: string;
+  direccion: string;
+}
 
+// lista de asociaciones datos
 
+interface AsocListaI {
+  admin_id: string;
+  descripcion: string;
+  fechaActualizacion: string;
+  fechaCreacion: string;
+  id: string;
+  nombre: string;
+  portada: string;
+  portada_id: null | string;
+}
 
-  // lista de asociaciones datos 
+// asociacion datos asocview
+export interface asocViewI {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  portada: string;
+  portada_id: string | null;
+  telefonos: Telefono[];
+}
 
-  interface AsocListaI {
-    admin_id: string;
-    descripcion: string;
-    fechaActualizacion: string;
-    fechaCreacion: string;
-    id: string;
-    nombre: string;
-    portada: string;
-    portada_id: null | string;
-  }
-  
-
-
-  // asociacion datos asocview 
-  export interface asocViewI {
-    id: string
-    nombre: string
-    descripcion: string
-    portada: string
-    portada_id: string | null
-    telefonos: Telefono[]
-  }
-  
-  export interface Telefono {
-    id: number
-    asociacion_id: string
-    numero: string
-    tipo: string
-  }
-  
+export interface Telefono {
+  id: number;
+  asociacion_id: string;
+  numero: string;
+  tipo: string;
+}
