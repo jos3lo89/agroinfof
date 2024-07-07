@@ -83,7 +83,7 @@ const router = createRouter({
           component: AsociacionView,
         },
         {
-          path: "anuncios/:titulo",
+          path: "anuncios",
           name: "anuncios",
           component: AnunciosView,
         },

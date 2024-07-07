@@ -4,11 +4,56 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "../../context/auth.store";
 import DarkMode from "../../components/common/DarkMode.vue";
 
+const visibleSections = ref<{ [key: string]: boolean }>({});
+
+const toggleSection = (section: string) => {
+  visibleSections.value[section] = !visibleSections.value[section];
+};
+
+const isSectionVisible = (section: string) => {
+  return visibleSections.value[section];
+};
+
 const AsocInformacion = defineAsyncComponent(
   () => import("../../components/AsocInformacionC.vue")
 );
 const AsocEditInfo = defineAsyncComponent(
   () => import("../../components/AsocEditInfoC.vue")
+);
+
+const RegistrarAnuncio = defineAsyncComponent(
+  () => import("../../components/RegistrarAnunciosC.vue")
+);
+
+const ListarAnuncios = defineAsyncComponent(
+  () => import("../../components/ListarAnunciosC.vue")
+);
+const RegistrarPublicaciones = defineAsyncComponent(
+  () => import("../../components/RegistraPublicaC.vue")
+);
+
+const ListarPublicaciones = defineAsyncComponent(
+  () => import("../../components/ListarPublicacionesEditC.vue")
+);
+
+const RegistrarMiembros = defineAsyncComponent(
+  () => import("../../components/RegistrarMiembrosC.vue")
+);
+
+const ListarMiembros = defineAsyncComponent(
+  () => import("../../components/ListarMiembrosC.vue")
+);
+
+const RegistrarReunion = defineAsyncComponent(
+  () => import("../../components/RegistrarReunionC.vue")
+);
+
+const ListaReuniones = defineAsyncComponent(
+  () => import("../../components/ListaReunionesC.vue")
+);
+
+const LlamarLista = defineAsyncComponent(
+  () => import("../../components/LlamarListaReuC.vue")
 );
 
 const layoutAsoc = shallowRef(AsocInformacion);
@@ -60,7 +105,7 @@ const handleClick2 = () => {
             class="flex ms-2 md:me-24"
           >
             <img
-              src="http://localhost:5000/uploads/logoAgroInfo.webp"
+              src="http://localhost:3000/uploads/logoAgroInfo.webp"
               class="h-8 me-3"
               alt="Logo de AgroInfo"
             />
@@ -169,171 +214,302 @@ const handleClick2 = () => {
       <ul class="space-y-2 font-medium">
         <li>
           <button
-            @click="cambiarLayoutAsoc(AsocInformacion)"
+            @click="toggleSection('asociacion')"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
-            <!-- <svg
-              class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 21"
-            >
-              <path
-                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
-              />
-              <path
-                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
-              />
-            </svg> -->
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              class="flex-shrink-0 w-5 h-5 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              data-slot="icon"
+              data-darkreader-inline-stroke=""
               fill="none"
-              viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-              />
+                d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+              ></path>
             </svg>
-
-            <span class="ms-3">Información</span>
+            <span>asociacion</span>
           </button>
+          <div
+            v-if="isSectionVisible('asociacion')"
+            class="bg-gray-900 p-3 rounded-lg my-1"
+          >
+            <button
+              @click="cambiarLayoutAsoc(AsocInformacion)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                />
+              </svg>
+
+              <span class="ms-3">Información</span>
+            </button>
+            <button
+              @click="cambiarLayoutAsoc(AsocEditInfo)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                data-slot="icon"
+                data-darkreader-inline-stroke=""
+                fill="none"
+                stroke-width="1.5"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                ></path>
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Editar informacion</span
+              >
+            </button>
+          </div>
         </li>
         <li>
           <button
-            @click="cambiarLayoutAsoc(AsocEditInfo)"
+            @click="toggleSection('anuncios')"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 18"
-            >
-              <path
-                d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
-              />
-            </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">editar info</span>
-            <span
-              class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300"
-              >Pro</span
-            >
-          </button>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-          >
-            <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"
-              />
-            </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
-            <span
-              class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
-              >3</span
-            >
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-          >
-            <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 18"
-            >
-              <path
-                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
-              />
-            </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-          >
-            <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 20"
-            >
-              <path
-                d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
-              />
-            </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-          >
-            <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
+              class="flex-shrink-0 w-5 h-5 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              data-slot="icon"
+              data-darkreader-inline-stroke=""
               fill="none"
-              viewBox="0 0 18 16"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
-                stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
-              />
+                d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"
+              ></path>
             </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-          </a>
+            <span>anuncios</span>
+          </button>
+          <div
+            v-if="isSectionVisible('anuncios')"
+            class="bg-gray-900 p-3 rounded-lg my-1"
+          >
+            <button
+              @click="cambiarLayoutAsoc(RegistrarAnuncio)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                data-slot="icon"
+                data-darkreader-inline-stroke=""
+                fill="none"
+                stroke-width="1.5"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                ></path>
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Registrar Anuncios</span
+              >
+            </button>
+
+            <button
+              @click="cambiarLayoutAsoc(ListarAnuncios)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                data-slot="icon"
+                data-darkreader-inline-stroke=""
+                fill="none"
+                stroke-width="1.5"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"
+                ></path>
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Listar anuncios</span>
+            </button>
+          </div>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            @click="toggleSection('pulicaciones')"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
+              class="flex-shrink-0 w-5 h-5 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              data-slot="icon"
+              data-darkreader-inline-stroke=""
+              fill="none"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
+              aria-hidden="true"
             >
               <path
-                d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"
-              />
-              <path
-                d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"
-              />
-              <path
-                d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"
-              />
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+              ></path>
             </svg>
-            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-          </a>
+            <span>Publicaciones</span>
+          </button>
+          <div
+            v-if="isSectionVisible('pulicaciones')"
+            class="bg-gray-900 p-3 rounded-lg my-1"
+          >
+            <button
+              @click="cambiarLayoutAsoc(RegistrarPublicaciones)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >registrar publicaciones</span
+              >
+            </button>
+            <button
+              @click="cambiarLayoutAsoc(ListarPublicaciones)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >edit publicaciones</span
+              >
+            </button>
+          </div>
+        </li>
+
+        <li>
+          <button
+            @click="toggleSection('miembros')"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              data-slot="icon"
+              data-darkreader-inline-stroke=""
+              fill="none"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+              ></path>
+            </svg>
+            <span>miembros</span>
+          </button>
+          <div
+            v-if="isSectionVisible('miembros')"
+            class="bg-gray-900 p-3 rounded-lg my-1"
+          >
+            <button
+              @click="cambiarLayoutAsoc(RegistrarMiembros)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >registrar miembros</span
+              >
+            </button>
+            <button
+              @click="cambiarLayoutAsoc(ListarMiembros)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Lista de miembros</span
+              >
+            </button>
+          </div>
+        </li>
+
+        <li>
+          <button
+            @click="toggleSection('reuniones')"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              data-slot="icon"
+              data-darkreader-inline-stroke=""
+              fill="none"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
+              ></path>
+            </svg>
+            <span>reuniones</span>
+          </button>
+          <div
+            v-if="isSectionVisible('reuniones')"
+            class="bg-gray-900 p-3 rounded-lg my-1"
+          >
+            <button
+              @click="cambiarLayoutAsoc(RegistrarReunion)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >registrar Reunion</span
+              >
+            </button>
+            <button
+              @click="cambiarLayoutAsoc(ListaReuniones)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap">lista Reunion</span>
+            </button>
+            <button
+              @click="cambiarLayoutAsoc(LlamarLista)"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <span class="flex-1 ms-3 whitespace-nowrap">llamar lista </span>
+            </button>
+          </div>
         </li>
       </ul>
     </div>

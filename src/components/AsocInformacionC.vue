@@ -1,17 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { AxiosUser } from "../service/instance";
-
-interface Asociacion {
-  admin_id: string;
-  descripcion: string;
-  fechaActualizacion: string;
-  fechaCreacion: string;
-  id: string;
-  nombre: string;
-  portada: string;
-  portada_id: null | string;
-}
+import { Asociacion } from "../interfaces/interfaces";
 
 const dataAsoc = ref({} as Asociacion);
 
@@ -41,7 +31,7 @@ onMounted(() => {
     >
       <div>
         <img
-          :src="dataAsoc.portada"
+          :src="dataAsoc.foto"
           alt="portada de la asociacion"
           class="rounded-lg md:h-72"
         />
@@ -50,9 +40,12 @@ onMounted(() => {
         <small>descripcion:</small>
         <p>{{ dataAsoc.descripcion }}</p>
         <small>fecha de creacion:</small>
-        <p>{{ dataAsoc.fechaCreacion }}</p>
+        <p>{{ new Date(dataAsoc.fecha_creacion).toLocaleString("es-PE") }}</p>
+        <!-- <p>{{ dataAsoc.fecha_creacion }}</p> -->
         <small>fecha de actualizacion:</small>
-        <p>{{ dataAsoc.fechaActualizacion }}</p>
+        <p>
+          {{ new Date(dataAsoc.fecha_actualizacion).toLocaleString("es-PE") }}
+        </p>
       </div>
     </div>
   </div>

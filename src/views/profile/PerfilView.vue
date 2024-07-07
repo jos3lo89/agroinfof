@@ -143,7 +143,7 @@ const eliminarFoto = async () => {
 
 const openModalEliminarAcc = ref(false);
 const openModalCambiarClave = ref(false);
-const openModalAddTelefono = ref(false);
+// const openModalAddTelefono = ref(false);
 const openModalEditarDatos = ref(false);
 
 const showModales = () => {
@@ -156,10 +156,10 @@ const showModalCambiarClave = () => {
   openMenuOpciones.value = !openMenuOpciones.value;
 };
 
-const showModalAddTelefono = () => {
-  openModalAddTelefono.value = !openModalAddTelefono.value;
-  openMenuOpciones.value = !openMenuOpciones.value;
-};
+// const showModalAddTelefono = () => {
+//   openModalAddTelefono.value = !openModalAddTelefono.value;
+//   openMenuOpciones.value = !openMenuOpciones.value;
+// };
 
 const showModalEditarDatos = () => {
   openModalEditarDatos.value = !openModalEditarDatos.value;
@@ -198,7 +198,9 @@ const showModalEditarDatos = () => {
         </p>
         <p class="text-orange-600">
           Rol:
-          <span class="text-black dark:text-white">{{ datosUsuario.rol }}</span>
+          <span class="text-black dark:text-white">{{
+            datosUsuario.rol == "admin" ? "Administrador" : datosUsuario.rol
+          }}</span>
         </p>
 
         <p v-if="datosUsuario.telefonos" class="text-orange-600">
