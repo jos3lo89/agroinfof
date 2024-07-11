@@ -4,6 +4,8 @@ import DarkMode from "../../components/common/DarkMode.vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../context/auth.store";
 import EliminarUserC from "../../components/EliminarUserC.vue";
+import { AxiosUser } from "../../service/instance";
+import { Alert } from "../../utils/sweetAlert";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -40,6 +42,54 @@ const toggleSection = (section: string) => {
 const isSectionVisible = (section: string) => {
   return visibleSections.value[section];
 };
+
+const logOut = async () => {
+  try {
+    // wqerk
+    const confirm = await Alert.confirmar(
+      "Cerrar sesión",
+      "Desea cerrar la sesión?",
+      "warning",
+      "Cerrar Sesión"
+    );
+
+    if (confirm) {
+      console.log("OK");
+
+      const res = await AxiosUser.logout();
+
+      authStore.accessToken = false;
+      authStore.rol = "visitante";
+      authStore.usuario.nombre = "";
+      authStore.usuario.foto = null;
+      authStore.usuario.id = "";
+      authStore.usuario.correo = "";
+
+      // const rutaActula = route.name as string;
+      router.push({ name: "inicio" });
+      if (res.status == 204) {
+      }
+    } else {
+      console.log("FAIL");
+    }
+    // wqerk
+
+    // const res = await AxiosUser.logout();
+
+    // console.log(res);
+
+    // authStore.accessToken = false;
+    // authStore.rol = "visitante";
+    // authStore.usuario.nombre = "";
+    // authStore.usuario.foto = null;
+    // authStore.usuario.id = "";
+    // authStore.usuario.correo = "";
+
+    // router.push({ name: "inicio" });
+  } catch (error: any) {
+    console.log(error);
+  }
+};
 </script>
 
 <template>
@@ -57,7 +107,7 @@ const isSectionVisible = (section: string) => {
             type="button"
             class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           >
-            <span class="sr-only">Open sidebar</span>
+            <!-- <span class="sr-only">Open sidebar</span> -->
             <svg
               class="w-6 h-6"
               aria-hidden="true"
@@ -82,8 +132,8 @@ const isSectionVisible = (section: string) => {
               alt="Logo de AgroInfo"
             />
             <span
-              class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
-              >AgroInfo</span
+              class="self-center text-green-600 text-xl font-semibold sm:text-2xl whitespace-nowrap"
+              >Agro<span class="text-orange-600">Info</span></span
             >
           </button>
         </div>
@@ -125,24 +175,35 @@ const isSectionVisible = (section: string) => {
               class="z-50 absolute top-16 right-4 shadow-2xl p-4 rounded-lg bg-white dark:bg-gray-800"
             >
               <div class="px-4 py-3" role="none">
-                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                  Neil Sims
+                <p
+                  class="text-sm text-gray-900 dark:text-white my-2"
+                  role="none"
+                >
+                  {{ authStore.usuario.nombre }}
                 </p>
                 <p
                   class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                   role="none"
                 >
-                  neil.sims@flowbite.com
+                  {{ authStore.usuario.correo }}
                 </p>
               </div>
               <ul class="py-1" role="none">
                 <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                    >Dashboard</a
+                  <button
+                    @click="router.push({ name: 'perfil' })"
+                    class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-200 dark:text-gray-300 dark:hover:bg-blue-600 dark:hover:text-white"
                   >
+                    Mi perfil
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="logOut"
+                    class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-200 dark:text-gray-300 dark:hover:bg-red-600 dark:hover:text-white"
+                  >
+                    Cerrar sesión
+                  </button>
                 </li>
               </ul>
             </div>
@@ -188,7 +249,10 @@ const isSectionVisible = (section: string) => {
             <span>Usuarios</span>
           </button>
 
-          <div v-if="isSectionVisible('usuarios')" class="bg-gray-900 p-3 rounded-lg my-1">
+          <div
+            v-if="isSectionVisible('usuarios')"
+            class="bg-gray-300 dark:bg-gray-900 p-3 rounded-lg my-1"
+          >
             <button
               @click="cambiarLayoutAdmin(EliminarUserC)"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -210,14 +274,14 @@ const isSectionVisible = (section: string) => {
                   d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
                 ></path>
               </svg>
-              <span class="ms-3">Eliminar usuario</span>
+              <span class="ms-3">Listar usuarios</span>
             </button>
           </div>
         </li>
 
         <li>
           <button
-            @click="toggleSection('asociacion') " 
+            @click="toggleSection('asociacion')"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -237,10 +301,13 @@ const isSectionVisible = (section: string) => {
                 d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
               ></path>
             </svg>
-            <span>Asociacion</span>
+            <span>Asociación</span>
           </button>
 
-          <div v-if="isSectionVisible('asociacion')" class="bg-gray-900 p-3 rounded-lg my-1">
+          <div
+            v-if="isSectionVisible('asociacion')"
+            class="bg-gray-300 dark:bg-gray-900 p-3 rounded-lg my-1"
+          >
             <button
               @click="cambiarLayoutAdmin(RegistrarAsoc)"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"

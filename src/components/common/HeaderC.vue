@@ -4,6 +4,7 @@ import DarkMode from "./DarkMode.vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../context/auth.store";
 import { AxiosUser } from "../../service/instance";
+import { Alert } from "../../utils/sweetAlert";
 
 const authStore = useAuthStore();
 
@@ -25,15 +26,42 @@ const imagenes = [
 const logout = async () => {
   openMenu.value = !openMenu.value;
   try {
-    await AxiosUser.logout();
+    const confirm = await Alert.confirmar(
+      "Cerrar sesión",
+      "Desea cerrar la sesión?",
+      "warning",
+      "Cerrar Sesión"
+    );
 
-    authStore.accessToken = false;
-    authStore.rol = "visitante";
-    authStore.usuario.nombre = "";
-    authStore.usuario.foto = null;
+    if (confirm) {
+      console.log("OK");
 
-    // const rutaActula = route.name as string;
-    router.push({ name: "inicio" });
+      const res = await AxiosUser.logout();
+
+      authStore.accessToken = false;
+      authStore.rol = "visitante";
+      authStore.usuario.nombre = "";
+      authStore.usuario.foto = null;
+      authStore.usuario.id = "";
+      authStore.usuario.correo = "";
+
+      // const rutaActula = route.name as string;
+      router.push({ name: "inicio" });
+      if (res.status == 204) {
+      }
+    } else {
+      console.log("FAIL");
+    }
+
+    // await AxiosUser.logout();
+
+    // authStore.accessToken = false;
+    // authStore.rol = "visitante";
+    // authStore.usuario.nombre = "";
+    // authStore.usuario.foto = null;
+
+    // // const rutaActula = route.name as string;
+    // router.push({ name: "inicio" });
   } catch (error) {
     console.log(error);
   }

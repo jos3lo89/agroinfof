@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex justify-start items-center p-2 mt-2 gap-4 py-3 pl-6">
+  <div class="flex justify-start items-center p-2 mt-2 gap-4 py-3 pl-6 ">
     <button
       @click="router.push({ name: 'asociacion' })"
       class="border-2 border-gray-400 border-solid rounded-lg px-2 py-1 hover:bg-indigo-600 hover:border-indigo-600"

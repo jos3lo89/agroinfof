@@ -35,11 +35,10 @@ const changeStado = async (estado: string, id: string) => {
 const borrarPubli = async (id: string) => {
   try {
     const confirm = await Alert.confirmar(
-      "borrar publicaicon",
-      "desea borra la publicacion",
+      "Borrar publicación",
+      "desea borrar la Publicación",
       "warning",
       "confirmar",
-      "el borrado fue confirmado"
     );
 
     if (confirm) {

@@ -2,6 +2,8 @@
 export interface authUserI {
   nombre: string;
   foto: string | null;
+  id: string;
+  correo: string;
 }
 
 // login datos de usuario
@@ -91,8 +93,6 @@ export interface asocViewI {
 export interface Asociacion {
   admin_id: string;
   descripcion: string;
-  fechaActualizacion: string;
-  fechaCreacion: string;
   correo: string;
   id: string;
   nombre: string;
@@ -271,49 +271,93 @@ export interface PublicacionById {
   fecha_actualizacion: string;
 }
 
-
-
 // comentarios
 
-export type ComentariosByIdAsoc = ComentariosAll[]
+export type ComentariosByIdAsoc = ComentarioPubli[];
 
-export interface ComentariosAll {
-  id: string
-  publicacion_id: string
-  usuario_id: string
-  comentario: string
-  nivel: string
-  padre: any
-  fecha_creacion: string
-  fecha_actualizacion: string
-  hijo_comentario: HijoComentario[]
+export interface UsuarioComent {
+  id: string;
+  nombre: string;
+  apellido: string;
+  correo: string;
+  clave: string;
+  rol: string;
+  foto: string | null;
+  foto_id: string | null;
+  fecha_nacimiento: string | null;
+  genero: string | null;
+  estado: string;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
+}
+
+export interface ComentarioPubli {
+  id: string;
+  publicacion_id: string;
+  usuario_id: string;
+  comentario: string;
+  nivel: string;
+  padre: string | null;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
+  usuario: UsuarioComent;
+  hijo_comentario: HijoComentario[];
 }
 
 export interface HijoComentario {
-  id: string
-  publicacion_id: string
-  usuario_id: string
-  comentario: string
-  nivel: string
-  padre: string
-  fecha_creacion: string
-  fecha_actualizacion: string
-  hijo_comentario: HijoComentario2[]
+  id: string;
+  publicacion_id: string;
+  usuario_id: string;
+  comentario: string;
+  nivel: string;
+  padre: string;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
+  usuario: Usuario;
+  hijo_comentario: HijoComentario2[];
 }
 
 export interface HijoComentario2 {
-  id: string
-  publicacion_id: string
-  usuario_id: string
-  comentario: string
-  nivel: string
-  padre: string
-  fecha_creacion: string
-  fecha_actualizacion: string
-  hijo_comentario: any[]
+  id: string;
+  publicacion_id: string;
+  usuario_id: string;
+  comentario: string;
+  nivel: string;
+  padre: string;
+  fecha_creacion: string;
+  fecha_actualizacion: string;
+  usuario: Usuario;
+  hijo_comentario: any[];
 }
 
+// export interface Usuario3 {
+//   id: string;
+//   nombre: string;
+//   apellido: string;
+//   correo: string;
+//   clave: string;
+//   rol: string;
+//   foto: string | null;
+//   foto_id: string | null;
+//   fecha_nacimiento: string | null;
+//   genero: string | null;
+//   estado: string;
+//   fecha_creacion: string;
+//   fecha_actualizacion: string;
+// }
 
-
-
-
+// export interface Usuario2 {
+//   id: string;
+//   nombre: string;
+//   apellido: string;
+//   correo: string;
+//   clave: string;
+//   rol: string;
+//   foto: string | null;
+//   foto_id: string | null;
+//   fecha_nacimiento: string | null;
+//   genero: string | null;
+//   estado: string;
+//   fecha_creacion: string;
+//   fecha_actualizacion: string;
+// }

@@ -23,11 +23,10 @@ onMounted(() => {
 const handleDeleteAnuncio = async (id: string) => {
   try {
     const confirm = await Alert.confirmar(
-      "borrar anuncio",
-      "desea borra la anucnio",
+      "Borrar anuncio",
+      "desea borrar el anuncio?",
       "warning",
       "confirmar",
-      "el borrado fue confirmado"
     );
 
     if (confirm) {
@@ -75,7 +74,7 @@ const changeStado = async (id: string, estado: string) => {
           <th scope="col" class="px-6 py-3">titulo</th>
           <th scope="col" class="px-6 py-3">estado</th>
           <th scope="col" class="px-6 py-3">fecha creacion</th>
-          <th scope="col" class="px-6 py-3">Actions</th>
+          <th scope="col" class="px-6 py-3">Acciones</th>
         </tr>
       </thead>
       <tbody>

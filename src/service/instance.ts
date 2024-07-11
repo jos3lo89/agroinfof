@@ -172,4 +172,40 @@ export class AxiosUser {
   static async comentariosByIdAsoc(idAsoc: string) {
     return await instance.get(`/comentarios/listar/${idAsoc}`);
   }
+
+  static async guardarComentariosLv1(publiId: string, comentario: string) {
+    return await instance.post(`/comentarios/lv1/${publiId}/${comentario}`);
+  }
+
+  static async guardarComentariosLv2(
+    publiId: string,
+    padreId: string,
+    comentario: string
+  ) {
+    return await instance.post(
+      `/comentarios/lv2/${publiId}/${padreId}/${comentario}`
+    );
+  }
+  static async guardarComentariosLv3(
+    publiId: string,
+    padreId: string,
+    comentario: string
+  ) {
+    return await instance.post(
+      `/comentarios/lv3/${publiId}/${padreId}/${comentario}`
+    );
+  }
+  static async borrarComentario(comentarioId: string) {
+    return await instance.post(`/comentarios/borrar/${comentarioId}`);
+  }
+
+  static async registrarReacciones(
+    idPublicacion: string,
+    idUser: string,
+    tipo: "like" | "dislike"
+  ) {
+    return await instance.post(
+      `/reaccion/idpublicacion/${idPublicacion}/iduser/${idUser}/tipo/${tipo}`
+    );
+  }
 }

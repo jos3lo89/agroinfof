@@ -24,11 +24,10 @@ onMounted(() => {
 const handleDeleteReu = async (id: string) => {
   try {
     const confirm = await Alert.confirmar(
-      "borrar reuniom",
-      "desea borra la reuniom",
+      "borrar reunión",
+      "desea borrar la reunión?",
       "warning",
       "confirmar",
-      "el borrado fue confirmado"
     );
     if (confirm) {
       console.log("OK");

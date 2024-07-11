@@ -43,11 +43,10 @@ onMounted(() => {
 const handleDeleteUser = async (id: string) => {
   try {
     const confirm = await Alert.confirmar(
-      "borrar usuario",
-      "desea borra el uisser",
+      "Borrar usuario",
+      "desea borrar el usuario?",
       "warning",
       "confirmar",
-      "el borrado fue confirmado"
     );
 
     if (confirm) {

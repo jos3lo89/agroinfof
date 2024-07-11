@@ -105,7 +105,7 @@ const handleSubmit = async () => {
         id="message"
         rows="2"
         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Write your thoughts here..."
+        placeholder="Escribe la descripción..."
       ></textarea>
     </div>
 
@@ -122,7 +122,7 @@ const handleSubmit = async () => {
       <label
         for="correo_asociacion"
         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >Email address</label
+        >Correo electronico</label
       >
     </div>
 
@@ -160,7 +160,7 @@ const handleSubmit = async () => {
       <label
         for="telefono_asociacion"
         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >Numero de Telefono</label
+        >Número de Telefono</label
       >
     </div>
 

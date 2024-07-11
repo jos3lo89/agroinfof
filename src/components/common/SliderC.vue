@@ -10,18 +10,18 @@ const modulos = [Navigation, Autoplay, Pagination];
 
 const datos = [
   {
-    img: "foto1.webp",
-    txt: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore excepturi in, at placeat rerum architecto?",
+    img: "quinuaSembrio.jpg",
+    txt: "",
   },
   {
-    img: "foto1.webp",
-    txt: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore excepturi in, at placeat rerum architecto?",
+    img: "papaSembrio.jpeg",
+    txt: "",
   },
 ];
 </script>
 
 <template>
-  <div class="my-3 rounded-lg shadow">
+  <div class="my-3 rounded-lg shadow max-w-[1200px] mx-auto">
     <Swiper
       :modules="modulos"
       :navigation="true"

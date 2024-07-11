@@ -22,11 +22,12 @@ const login = async () => {
       authStore.accessToken = true;
       authStore.rol = res.data.rol;
       authStore.usuario.nombre = res.data.nombre;
+      authStore.usuario.id = res.data.id;
+      authStore.usuario.correo = res.data.correo;
       authStore.usuario.foto = res.data.foto;
     }
 
     router.push({ name: "inicio" });
-
   } catch (error: any) {
     console.log(error);
     error.response.data.message.forEach((error: string) => {

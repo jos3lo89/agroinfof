@@ -24,11 +24,10 @@ onMounted(() => {
 const handleDeleteMiembro = async (id: string) => {
   try {
     const confirm = await Alert.confirmar(
-      "borrar miembro",
-      "desea borra la miembro",
+      "Borrar miembro",
+      "Desea borrar el miembro",
       "warning",
       "confirmar",
-      "el borrado fue confirmado"
     );
 
     if (confirm) {
