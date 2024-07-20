@@ -59,7 +59,7 @@ const handleSubmit = async () => {
 
 <template>
   <div class="text-center my-6">
-    <h1 class="text-2xl font-semibold capitalize">RegistrarMiembros</h1>
+    <h1 class="text-2xl font-semibold capitalize">Registrar Miembros</h1>
   </div>
 
   <form @submit.prevent="handleSubmit" class="max-w-md mx-auto">
@@ -232,7 +232,7 @@ const handleSubmit = async () => {
         >
           <!-- <option selected disabled>Elija un genera</option> -->
           <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
+          <option value="femenino">Femenina</option>
         </select>
       </div>
     </div>

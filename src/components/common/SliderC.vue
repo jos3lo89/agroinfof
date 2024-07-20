@@ -10,11 +10,11 @@ const modulos = [Navigation, Autoplay, Pagination];
 
 const datos = [
   {
-    img: "quinuaSembrio.jpg",
+    img: "asoc1.jpg",
     txt: "",
   },
   {
-    img: "papaSembrio.jpeg",
+    img: "asoc2.jpg",
     txt: "",
   },
 ];
